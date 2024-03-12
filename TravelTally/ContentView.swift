@@ -17,6 +17,14 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [FundItem]
     
+    @AppStorage("total_days", store: .standard) var totalDays: Int = 0
+    
+    @AppStorage("total_per_day", store: .standard) var totalDailyAmount: Int = 0
+    
+    @AppStorage("total_for_period", store: .standard) var totalForPeriod: Int = 0
+
+    
+
     @State private var showDialog = false
     @State private var showTotal = false
     
@@ -28,6 +36,7 @@ struct ContentView: View {
     
     @State private var dayCountField = ""
     @State private var totalPerDay = ""
+    
     
     
     var body: some View {
@@ -48,7 +57,7 @@ struct ContentView: View {
                     }
                     .onDelete(perform: deleteItems)
                 } footer: {
-                    CardView(total: calcDailyTotal())
+                    CardView(total: calcDailyTotal(), perDiemTotal: totalForPeriod)
                 }
                 
             }
@@ -140,6 +149,7 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button {
+                        upsertPerDiem(perDiem: UserPerDiem(id: UUID(), totalDays: Int(dayCountField) ?? 0, perDayTotal: Int(totalPerDay) ?? 0) )
                     } label: {
                         Label("Done", systemImage: "flag.checkered")
                     }
@@ -170,14 +180,23 @@ struct ContentView: View {
         }
     }
     
-    private func calcDailyTotal() -> String {
+    private func upsertPerDiem(perDiem: UserPerDiem) {
+        showTotal = false
+        withAnimation {
+            totalDays = perDiem.totalDays
+            totalDailyAmount = perDiem.perDayTotal
+            totalForPeriod = perDiem.dateRangeTotal
+        }
+    }
+    
+    private func calcDailyTotal() -> Double {
         var total: Float = 0
         
         items.forEach{item in
             total = total + item.amount
         }
         
-        return String(total)
+        return Double(total)
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -192,12 +211,13 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    var total: String
+    var total: Double
+    var perDiemTotal: Int
         
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Total: $" + total)
+                Text("Total: $" + String(total))
                     .font(.headline)
                 Spacer()
                 Label("Today", systemImage: "clock")
@@ -206,8 +226,24 @@ struct CardView: View {
             .font(.caption)
         }
         .padding()
-        .foregroundColor(.yellow)
+        .foregroundColor(figureOutColor(total: total, perDiemTotal: perDiemTotal))
     }
+}
+
+func figureOutColor(total: Double, perDiemTotal: Int ) -> Color {
+    
+    let percentageOfTotal = ((total / Double(perDiemTotal)) as Double)
+    
+
+    
+   
+   if(percentageOfTotal <= 0.25){
+       return Color.green
+   }else if (percentageOfTotal > 0.25 && percentageOfTotal <= 0.75){
+       return Color.yellow
+   }else{
+       return Color.red
+   }
 }
 
 #Preview {

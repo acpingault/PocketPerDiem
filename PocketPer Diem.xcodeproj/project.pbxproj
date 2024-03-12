@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA5113002B941C4B000CB41D /* UserPerDiem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5112FF2B941C4B000CB41D /* UserPerDiem.swift */; };
 		FAB761C92B89898900718691 /* TravelTallyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB761C82B89898900718691 /* TravelTallyApp.swift */; };
 		FAB761CB2B89898900718691 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB761CA2B89898900718691 /* ContentView.swift */; };
 		FAB761CD2B89898900718691 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB761CC2B89898900718691 /* Item.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA5112FF2B941C4B000CB41D /* UserPerDiem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPerDiem.swift; sourceTree = "<group>"; };
 		FAB761C52B89898900718691 /* PocketPer Diem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PocketPer Diem.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB761C82B89898900718691 /* TravelTallyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelTallyApp.swift; sourceTree = "<group>"; };
 		FAB761CA2B89898900718691 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				FAB761CC2B89898900718691 /* Item.swift */,
 				FAB761CE2B89898B00718691 /* Assets.xcassets */,
 				FAB761D02B89898B00718691 /* Preview Content */,
+				FA5112FF2B941C4B000CB41D /* UserPerDiem.swift */,
 			);
 			path = TravelTally;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAB761CB2B89898900718691 /* ContentView.swift in Sources */,
+				FA5113002B941C4B000CB41D /* UserPerDiem.swift in Sources */,
 				FAB761CD2B89898900718691 /* Item.swift in Sources */,
 				FAB761C92B89898900718691 /* TravelTallyApp.swift in Sources */,
 			);
